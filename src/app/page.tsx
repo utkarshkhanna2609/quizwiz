@@ -1,4 +1,4 @@
-import SignInButton from "@/components/SignInButton";
+import SignInButton from "@/components/SigninButton";
 import {
   Card,
   CardContent,

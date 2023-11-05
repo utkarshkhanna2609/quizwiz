@@ -5,7 +5,7 @@ import React from "react";
 import UserAccountNav from "./UserAccountNav";
 
 import { getAuthSession } from "@/lib/nextauth";
-import SignInButton from "./SignInButton";
+import SignInButton from "./SigninButton";
 import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = async () => {
