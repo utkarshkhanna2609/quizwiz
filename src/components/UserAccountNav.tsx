@@ -11,17 +11,29 @@ import React from "react";
 import Link from 'next/link';
 import { signOut } from "next-auth/react";
 import { LogOut } from "lucide-react";
+import UserAvatar from "./UserAvatar";
+
 
 type Props = {
   user: Pick<User, "name" | "image" | "email">;
 };
 
 const UserAccountNav = ({ user }: Props) => {
+    if (!user) {
+        console.error('UserAccountNav: No user data');
+        return null;
+      }
   return (
+      
     <DropdownMenu>
-      <DropdownMenuTrigger></DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white" align="end">
-        <div className="flex items-center justify-start gap-2 p-2">
+    <DropdownMenuTrigger className="flex items-center justify-center text-center hover:text-md hover:font-extrabold transition-all duration-150 ease-in-out px-2 py-2">
+      {user.name?.toUpperCase()}
+      <div className="hover: transition-all duration-150 ease-in-out px-2 py-2">
+        <UserAvatar user={user}/>
+      </div>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+    <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && <p className="font-medium">{user.name}</p>}
             {user.email && (
@@ -31,14 +43,11 @@ const UserAccountNav = ({ user }: Props) => {
             )}
           </div>
         </div>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/">Meow</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Billing</DropdownMenuItem>
+      <DropdownMenuItem>Progress</DropdownMenuItem>
+      <DropdownMenuItem
           onSelect={(event) => {
             event.preventDefault();
             signOut().catch(console.error);
@@ -48,8 +57,8 @@ const UserAccountNav = ({ user }: Props) => {
           Sign out
           <LogOut className="w-4 h-4 ml-2 " />
         </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    </DropdownMenuContent>
+  </DropdownMenu>
   );
 };
 
