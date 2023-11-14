@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, "antialiased min-h-screen pt-16")}>
         <Providers>
-          {/* @ts-expect-error Server Component */}
+          {/* @ts-ignore */}
             <Navbar/>
           {children}
         </Providers>
